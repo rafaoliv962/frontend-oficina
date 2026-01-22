@@ -1,14 +1,22 @@
-// ================================
-// CONFIGURAÇÃO DA API
-// ================================
-const API_URL = "http://localhost:3000";
+// ===============================
+// UTIL
+// ===============================
+function $(id) {
+  return document.getElementById(id);
+}
 
-// ================================
- let clientes = [];
+// ===============================
+// CLIENTES
+// ===============================
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+function salvarClientes() {
+  localStorage.setItem("clientes", JSON.stringify(clientes));
+}
 
 function addCliente() {
-  const nome = document.getElementById("nome").value;
-  const telefone = document.getElementById("telefone").value;
+  const nome = $("nome")?.value.trim();
+  const telefone = $("telefone")?.value.trim();
 
   if (!nome || !telefone) {
     alert("Preencha todos os campos");
@@ -16,152 +24,208 @@ function addCliente() {
   }
 
   clientes.push({ nome, telefone });
+  salvarClientes();
   renderClientes();
 
-  document.getElementById("nome").value = "";
-  document.getElementById("telefone").value = "";
+  $("nome").value = "";
+  $("telefone").value = "";
 }
 
 function renderClientes() {
-  const lista = document.getElementById("listaClientes");
-  lista.innerHTML = "";
+  const tabela = $("listaClientes");
+  if (!tabela) return;
+
+  tabela.innerHTML = "";
 
   clientes.forEach((c, i) => {
-    lista.innerHTML += `
-      <div class="item">
-        <strong>${c.nome}</strong><br>
-        ${c.telefone}
-        <div class="actions">
-          <button class="edit" onclick="editarCliente(${i})">Editar</button>
-          <button class="delete" onclick="excluirCliente(${i})">Excluir</button>
-        </div>
-      </div>
+    tabela.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${c.nome}</td>
+        <td>${c.telefone}</td>
+        <td>
+          <button onclick="editarCliente(${i})">Editar</button>
+          <button onclick="excluirCliente(${i})">Excluir</button>
+        </td>
+      </tr>
     `;
   });
 }
 
-function excluirCliente(index) {
-  clientes.splice(index, 1);
+function excluirCliente(i) {
+  clientes.splice(i, 1);
+  salvarClientes();
   renderClientes();
 }
 
-function editarCliente(index) {
-  const c = clientes[index];
-  document.getElementById("nome").value = c.nome;
-  document.getElementById("telefone").value = c.telefone;
-  excluirCliente(index);
+function editarCliente(i) {
+  const c = clientes[i];
+  $("nome").value = c.nome;
+  $("telefone").value = c.telefone;
+  excluirCliente(i);
 }
 
-// ================================
+// ===============================
 // CARROS
-// ================================
+// ===============================
+let carros = JSON.parse(localStorage.getItem("carros")) || [];
 
-// Carregar clientes no select
-async function carregarClientesSelect() {
-  const select = document.getElementById("clienteCarro");
-  if (!select) return;
-
-  const res = await fetch(`${API_URL}/clientes`);
-  const clientes = await res.json();
-
-  select.innerHTML = `<option value="">Selecione o cliente</option>`;
-
-  clientes.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c.id;
-    opt.textContent = c.nome;
-    select.appendChild(opt);
-  });
+function salvarCarros() {
+  localStorage.setItem("carros", JSON.stringify(carros));
 }
 
-// Buscar carros
-async function carregarCarros() {
-  const res = await fetch(`${API_URL}/carros`);
-  const carros = await res.json();
-  renderCarros(carros);
-}
+function addCarro() {
+  const placa = $("placa")?.value.trim();
+  const modelo = $("modelo")?.value.trim();
+  const ano = $("ano")?.value.trim();
 
-// Renderizar carros
-function renderCarros(carros) {
-  const lista = document.getElementById("listaCarros");
-  if (!lista) return;
-
-  lista.innerHTML = "";
-
-  carros.forEach(carro => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div>
-        <strong>${carro.modelo}</strong><br>
-        <small>${carro.placa} - ${carro.ano}</small>
-      </div>
-      <div>
-        <button onclick="editarCarro(${carro.id}, '${carro.modelo}', '${carro.placa}', '${carro.ano}')">Editar</button>
-        <button onclick="excluirCarro(${carro.id})">Excluir</button>
-      </div>
-    `;
-    lista.appendChild(li);
-  });
-}
-
-// Adicionar carro
-async function addCarro() {
-  const cliente_id = document.getElementById("clienteCarro").value;
-  const modelo = document.getElementById("modelo").value;
-  const placa = document.getElementById("placa").value;
-  const ano = document.getElementById("ano").value;
-
-  if (!cliente_id || !modelo || !placa || !ano) {
+  if (!placa || !modelo || !ano) {
     alert("Preencha todos os campos");
     return;
   }
 
-  await fetch(`${API_URL}/carros`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ cliente_id, modelo, placa, ano })
-  });
+  carros.push({ placa, modelo, ano });
+  salvarCarros();
+  renderCarros();
 
-  document.getElementById("modelo").value = "";
-  document.getElementById("placa").value = "";
-  document.getElementById("ano").value = "";
-
-  carregarCarros();
+  $("placa").value = "";
+  $("modelo").value = "";
+  $("ano").value = "";
 }
 
-// Editar carro
-async function editarCarro(id, modeloAtual, placaAtual, anoAtual) {
-  const modelo = prompt("Modelo:", modeloAtual);
-  const placa = prompt("Placa:", placaAtual);
-  const ano = prompt("Ano:", anoAtual);
+function renderCarros() {
+  const tabela = $("listaCarros");
+  if (!tabela) return;
 
-  if (!modelo || !placa || !ano) return;
+  tabela.innerHTML = "";
 
-  await fetch(`${API_URL}/carros/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ modelo, placa, ano })
+  carros.forEach((c, i) => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${c.placa}</td>
+        <td>${c.modelo}</td>
+        <td>${c.ano}</td>
+        <td>
+          <button onclick="editarCarro(${i})">Editar</button>
+          <button onclick="excluirCarro(${i})">Excluir</button>
+        </td>
+      </tr>
+    `;
   });
-
-  carregarCarros();
 }
 
-// Excluir carro
-async function excluirCarro(id) {
-  if (!confirm("Deseja excluir este carro?")) return;
-
-  await fetch(`${API_URL}/carros/${id}`, {
-    method: "DELETE"
-  });
-
-  carregarCarros();
+function excluirCarro(i) {
+  carros.splice(i, 1);
+  salvarCarros();
+  renderCarros();
 }
 
-// ================================
+function editarCarro(i) {
+  const c = carros[i];
+  $("placa").value = c.placa;
+  $("modelo").value = c.modelo;
+  $("ano").value = c.ano;
+  excluirCarro(i);
+}
+
+// ===============================
+// DASHBOARD
+// ===============================
+function carregarDashboard() {
+  if ($("totalClientes")) {
+    $("totalClientes").innerText = clientes.length;
+  }
+
+  if ($("totalCarros")) {
+    $("totalCarros").innerText = carros.length;
+  }
+
+  if ($("dataHoje")) {
+    $("dataHoje").innerText = new Date().toLocaleDateString("pt-BR");
+  }
+}
+
+// ===============================
 // INIT
-// ================================
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
-  carregarClientes();
-  carregarClientesSelect();
-  carregarCarros();
+  renderClientes();
+  renderCarros();
+  carregarDashboard();
 });
+// ===============================
+// ORDEM DE SERVIÇO (OS)
+// ===============================
+let ordens = JSON.parse(localStorage.getItem("ordens")) || [];
+
+function salvarOS() {
+  localStorage.setItem("ordens", JSON.stringify(ordens));
+}
+
+function addOS() {
+  const cliente = $("osCliente")?.value.trim();
+  const veiculo = $("osVeiculo")?.value.trim();
+  const servico = $("osServico")?.value.trim();
+  const valor = $("osValor")?.value.trim();
+
+  if (!cliente || !veiculo || !servico || !valor) {
+    alert("Preencha todos os campos");
+    return;
+  }
+
+  ordens.push({
+    cliente,
+    veiculo,
+    servico,
+    valor
+  });
+
+  salvarOS();
+  renderOS();
+
+  $("osCliente").value = "";
+  $("osVeiculo").value = "";
+  $("osServico").value = "";
+  $("osValor").value = "";
+}
+
+function renderOS() {
+  const tabela = $("listaOS");
+  if (!tabela) return;
+
+  tabela.innerHTML = "";
+
+  ordens.forEach((o, i) => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${o.cliente}</td>
+        <td>${o.veiculo}</td>
+        <td>${o.servico}</td>
+        <td>R$ ${Number(o.valor).toFixed(2)}</td>
+        <td>
+          <button onclick="editarOS(${i})">Editar</button>
+          <button onclick="excluirOS(${i})">Excluir</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function excluirOS(i) {
+  ordens.splice(i, 1);
+  salvarOS();
+  renderOS();
+}
+
+function editarOS(i) {
+  const o = ordens[i];
+
+  $("osCliente").value = o.cliente;
+  $("osVeiculo").value = o.veiculo;
+  $("osServico").value = o.servico;
+  $("osValor").value = o.valor;
+
+  excluirOS(i);
+}
+

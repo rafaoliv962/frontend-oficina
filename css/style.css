@@ -1,148 +1,201 @@
-* * {
+/* ===============================
+   RESET / BASE
+================================ */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-  background: #f4f6f8;
-}
-
-/* Layout */
-.container {
+  background-color: #0f172a;
+  color: #e5e7eb;
   display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* ===============================
+   SIDEBAR
+================================ */
 .sidebar {
   width: 220px;
-  background: #111827;
-  color: #fff;
+  background-color: #020617;
   padding: 20px;
+  position: fixed;
+  height: 100vh;
 }
 
 .sidebar h2 {
-  font-size: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #38bdf8;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: #cbd5f5;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #1e293b;
+}
+
+.sidebar a.active {
+  background-color: #38bdf8;
+  color: #020617;
+  font-weight: bold;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+.main {
+  margin-left: 220px;
+  padding: 30px;
+  width: 100%;
+}
+
+.header {
   margin-bottom: 30px;
 }
 
-.sidebar ul {
-  list-style: none;
+.header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
 }
 
-.sidebar ul li {
-  margin-bottom: 12px;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: #cbd5e1;
-  padding: 10px;
-  display: block;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
-  background: #2563eb;
-  color: #fff;
-}
-
-/* Conteúdo */
-.main {
-  flex: 1;
-  padding: 30px;
-}
-
-.main h1 {
+/* ===============================
+   CARDS
+================================ */
+.card {
+  background-color: #020617;
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-/* Cards Dashboard */
-.cards {
+.card h3 {
+  margin-bottom: 15px;
+  color: #38bdf8;
+}
+
+/* ===============================
+   FORMULÁRIOS
+================================ */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background-color: #1e293b;
+  color: #e5e7eb;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+/* ===============================
+   BOTÕES
+================================ */
+button {
+  padding: 10px 16px;
+  background-color: #38bdf8;
+  color: #020617;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0ea5e9;
+}
+
+/* Botões de ação */
+.actions button {
+  margin-right: 5px;
+}
+
+/* ===============================
+   TABELAS
+================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #1e293b;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  color: #38bdf8;
+}
+
+tbody tr {
+  border-bottom: 1px solid #1e293b;
+}
+
+tbody tr:hover {
+  background-color: #020617;
+}
+
+/* ===============================
+   RESPONSIVO
+================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
+
+/* ===============================
+   DASHBOARD
+================================ */
+.dashboard-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
-.card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+.dash-card {
+  background-color: #020617;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  text-align: center;
 }
 
-.card h3 {
+.dash-card h3 {
   margin-bottom: 10px;
+  color: #38bdf8;
   font-size: 16px;
 }
 
-.card span {
-  font-size: 22px;
+.dash-card span {
+  font-size: 36px;
   font-weight: bold;
-}
-
-/* Formulários */
-.form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-}
-
-.form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.form button {
-  width: 100%;
-  padding: 10px;
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.form button:hover {
-  opacity: 0.9;
-}
-
-/* Lista */
-.list {
-  margin-top: 20px;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.item {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.item:last-child {
-  border-bottom: none;
-}
-
-.actions button {
-  margin-right: 5px;
-  padding: 5px 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit {
-  background: #facc15;
-}
-
-.delete {
-  background: #ef4444;
-  color: #fff;
+  color: #e5e7eb;
 }

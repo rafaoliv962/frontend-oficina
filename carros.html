@@ -2,64 +2,68 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Carros | Oficina</title>
-
-  <!-- CSS GLOBAL -->
+  <title>Carros | Velasques Autocenter</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="container">
-
-  <!-- MENU LATERAL -->
-  <aside class="sidebar">
-    <h1>Velasques Autocenter</h1>
-
-    <a href="dashboard.html">Dashboard</a>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Velasques</h2>
+    <a href="index.html">Dashboard</a>
     <a href="clientes.html">Clientes</a>
-    <a href="carros.html">Carros</a>
-    <a href="#">Estoque</a>
-    <a href="#">Ordem de Serviço</a>
-  </aside>
+    <a href="carros.html" class="active">Carros</a>
+    <a href="estoque.html">Estoque</a>
+  </div>
 
-  <!-- CONTEÚDO -->
-  <main class="content">
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="main">
 
-    <!-- TOPO -->
+    <!-- HEADER -->
     <div class="header">
-      <h2>Carros dos Clientes</h2>
-      <p>Cadastro e gerenciamento de veículos</p>
+      <h1>Carros</h1>
+      <p style="color:#9ca3af;">Gerencie os veículos dos clientes</p>
     </div>
 
-    <!-- CADASTRO -->
-    <div class="card">
-      <h3>Cadastrar / Editar Carro</h3>
+    <!-- FORMULÁRIO -->
+    <div class="card" style="margin-bottom:30px;">
+      <h3>Cadastrar Carro</h3>
 
-      <label>Cliente</label>
+      <!-- SELECT DE CLIENTE -->
       <select id="clienteCarro">
         <option value="">Selecione o cliente</option>
       </select>
 
-      <label>Placa</label>
-      <input type="text" id="placaCarro" placeholder="ABC-1234">
-
-      <label>Modelo</label>
-      <input type="text" id="modeloCarro" placeholder="Ex: Gol 1.6">
+      <input type="text" id="placa" placeholder="Placa">
+      <input type="text" id="modelo" placeholder="Modelo">
+      <input type="text" id="ano" placeholder="Ano">
 
       <button onclick="addCarro()">Salvar Carro</button>
     </div>
 
-    <!-- LISTA -->
+    <!-- TABELA -->
     <div class="card">
-      <h3>Carros Cadastrados</h3>
-      <ul id="listaCarros"></ul>
+      <h3>Lista de Carros</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Placa</th>
+            <th>Ano</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="listaCarros">
+          <!-- JS preenche aqui -->
+        </tbody>
+      </table>
     </div>
 
-  </main>
+  </div>
 
-</div>
-
-<script src="js/app.js"></script>
+  <!-- JS -->
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -2,70 +2,63 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Ordem de Serviço</title>
+  <title>Ordem de Serviço | Velasques Autocenter</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="container">
-
-  <!-- MENU -->
-  <aside class="sidebar">
-    <h1>Velasques Autocenter</h1>
-    <a href="dashboard.html">Dashboard</a>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Velasques</h2>
+    <a href="index.html">Dashboard</a>
     <a href="clientes.html">Clientes</a>
     <a href="carros.html">Carros</a>
-    <a href="os.html">Ordem de Serviço</a>
-    <a href="#">Estoque</a>
-  </aside>
+    <a href="estoque.html">Estoque</a>
+    <a href="os.html" class="active">Ordem de Serviço</a>
+  </div>
 
-  <!-- CONTEÚDO -->
-  <main class="content">
+  <!-- MAIN -->
+  <div class="main">
 
     <div class="header">
-      <h2>Ordem de Serviço</h2>
-      <p>Abertura e controle de serviços</p>
+      <h1>Ordem de Serviço</h1>
+      <p style="color:#9ca3af;">Controle de serviços realizados</p>
     </div>
 
-    <div class="card">
-      <h3>Abrir OS</h3>
+    <!-- FORM -->
+    <div class="card" style="margin-bottom: 30px;">
+      <h3>Nova Ordem de Serviço</h3>
 
-      <label>Cliente</label>
-      <select id="osCliente">
-        <option value="">Selecione o cliente</option>
-      </select>
-
-      <label>Carro</label>
-      <select id="osCarro">
-        <option value="">Selecione o carro</option>
-      </select>
-
-      <label>Descrição do serviço</label>
-      <input id="osDescricao" placeholder="Ex: Troca de embreagem">
-
-      <label>Valor (R$)</label>
-      <input id="osValor" type="number" placeholder="0.00">
-
-      <label>Status</label>
-      <select id="osStatus">
-        <option value="Aberta">Aberta</option>
-        <option value="Em andamento">Em andamento</option>
-        <option value="Finalizada">Finalizada</option>
-      </select>
-
-      <button onclick="addOS()">Salvar OS</button>
+      <input type="text" id="osCliente" placeholder="Nome do Cliente">
+      <input type="text" id="osVeiculo" placeholder="Veículo / Placa">
+      <input type="text" id="osServico" placeholder="Descrição do Serviço">
+      <input type="number" id="osValor" placeholder="Valor (R$)">
+      <button onclick="addOS()">Salvar Ordem</button>
     </div>
 
+    <!-- LISTA -->
     <div class="card">
       <h3>Ordens de Serviço</h3>
-      <ul id="listaOS"></ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Veículo</th>
+            <th>Serviço</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="listaOS">
+          <!-- JS -->
+        </tbody>
+      </table>
     </div>
 
-  </main>
+  </div>
 
-</div>
-
-<script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

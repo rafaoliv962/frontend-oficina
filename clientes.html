@@ -2,38 +2,58 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Clientes</title>
+  <title>Clientes | Velasques Autocenter</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="container">
+  <!-- SIDEBAR -->
   <div class="sidebar">
-    <h2>Oficina</h2>
-    <ul>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="clientes.html" class="active">Clientes</a></li>
-      <li><a href="carros.html">Carros</a></li>
-      <li><a href="estoque.html">Estoque</a></li>
-      <li><a href="os.html">Ordem de Serviço</a></li>
-    </ul>
+    <h2>Velasques</h2>
+    <a href="index.html">Dashboard</a>
+    <a href="clientes.html" class="active">Clientes</a>
+    <a href="carros.html">Carros</a>
+    <a href="estoque.html">Estoque</a>
   </div>
 
+  <!-- CONTEÚDO -->
   <div class="main">
-    <h1>Clientes</h1>
 
-    <div class="form">
+    <div class="header">
+      <h1>Clientes</h1>
+      <p style="color:#9ca3af;">Cadastro e gerenciamento de clientes</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="card" style="margin-bottom:30px;">
+      <h3>Cadastrar Cliente</h3>
+
       <input type="text" id="nome" placeholder="Nome do cliente">
       <input type="text" id="telefone" placeholder="Telefone">
-      <button onclick="addCliente()">Salvar</button>
+      <button onclick="addCliente()">Salvar Cliente</button>
     </div>
 
-    <div class="list" id="listaClientes">
-      <!-- clientes aparecem aqui -->
+    <!-- LISTA -->
+    <div class="card">
+      <h3>Clientes Cadastrados</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="listaClientes">
+          <!-- JS -->
+        </tbody>
+      </table>
     </div>
+
   </div>
-</div>
 
-<script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
