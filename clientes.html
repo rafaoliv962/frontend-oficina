@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="sidebar">
+    <h2>Oficina</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="clientes.html" class="active">Clientes</a></li>
+      <li><a href="carros.html">Carros</a></li>
+      <li><a href="estoque.html">Estoque</a></li>
+      <li><a href="os.html">Ordem de Serviço</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <h1>Clientes</h1>
+
+    <div class="form">
+      <input type="text" id="nome" placeholder="Nome do cliente">
+      <input type="text" id="telefone" placeholder="Telefone">
+      <button onclick="addCliente()">Salvar</button>
+    </div>
+
+    <div class="list" id="listaClientes">
+      <!-- clientes aparecem aqui -->
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

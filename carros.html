@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carros | Oficina</title>
+
+  <!-- CSS GLOBAL -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- MENU LATERAL -->
+  <aside class="sidebar">
+    <h1>Velasques Autocenter</h1>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="carros.html">Carros</a>
+    <a href="#">Estoque</a>
+    <a href="#">Ordem de Serviço</a>
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="content">
+
+    <!-- TOPO -->
+    <div class="header">
+      <h2>Carros dos Clientes</h2>
+      <p>Cadastro e gerenciamento de veículos</p>
+    </div>
+
+    <!-- CADASTRO -->
+    <div class="card">
+      <h3>Cadastrar / Editar Carro</h3>
+
+      <label>Cliente</label>
+      <select id="clienteCarro">
+        <option value="">Selecione o cliente</option>
+      </select>
+
+      <label>Placa</label>
+      <input type="text" id="placaCarro" placeholder="ABC-1234">
+
+      <label>Modelo</label>
+      <input type="text" id="modeloCarro" placeholder="Ex: Gol 1.6">
+
+      <button onclick="addCarro()">Salvar Carro</button>
+    </div>
+
+    <!-- LISTA -->
+    <div class="card">
+      <h3>Carros Cadastrados</h3>
+      <ul id="listaCarros"></ul>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
